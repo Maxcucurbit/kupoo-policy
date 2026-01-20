@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <title>KuPoo 隐私政策</title>
+  <style>
+    :root{
+      --bg: #0b1220;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.08);
+      --text: rgba(255,255,255,.90);
+      --muted: rgba(255,255,255,.65);
+      --line: rgba(255,255,255,.12);
+      --brand: #7c9cff;
+      --brand2:#46e6d3;
+      --shadow: 0 16px 50px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius2: 14px;
+      --maxw: 1080px;
+      --font: ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB",
+              "Microsoft YaHei", "Noto Sans CJK SC", "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    [data-theme="light"]{
+      --bg: #f6f7fb;
+      --panel: rgba(0,0,0,.04);
+      --panel2: rgba(0,0,0,.06);
+      --text: rgba(0,0,0,.88);
+      --muted: rgba(0,0,0,.58);
+      --line: rgba(0,0,0,.10);
+      --brand:#3b63ff;
+      --brand2:#00b7a8;
+      --shadow: 0 18px 55px rgba(20,40,80,.15);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      background:
+        radial-gradient(1000px 500px at 10% 0%, rgba(124,156,255,.22), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(70,230,211,.18), transparent 55%),
+        radial-gradient(800px 500px at 40% 90%, rgba(255,138,76,.10), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.72;
+      letter-spacing:.2px;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    a:hover{ opacity:.92; }
+
+    .wrap{
+      width: min(var(--maxw), calc(100% - 32px));
+      margin: 0 auto;
+      padding: 22px 0 48px;
+    }
+
+    /* Top bar */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      padding: 10px 0;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(0,0,0,.25), transparent);
+    }
+    [data-theme="light"] .topbar{
+      background: linear-gradient(to bottom, rgba(246,247,251,.80), rgba(246,247,251,0));
+    }
+    .topbar .row{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; min-width: 0;
+    }
+    .logo{
+      width:38px; height:38px; border-radius: 12px;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,.95), rgba(255,255,255,0) 55%),
+        linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 10px 26px rgba(0,0,0,.22);
+      flex:0 0 auto;
+    }
+    .brand .t{
+      display:flex; flex-direction:column; gap:1px; min-width:0;
+    }
+    .brand .t strong{
+      font-size: 14px;
+      letter-spacing:.3px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .brand .t span{
+      font-size: 12px; color: var(--muted);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+
+    .actions{
+      display:flex; gap:10px; align-items:center;
+    }
+    .btn{
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 12px;
+      font-size: 13px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:hover{ background: var(--panel2); border-color: rgba(255,255,255,.18); }
+    [data-theme="light"] .btn:hover{ border-color: rgba(0,0,0,.14); }
+    .btn:active{ transform: translateY(1px) scale(.99); }
+    .btn .dot{
+      width:10px; height:10px; border-radius:50%;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 6px 14px rgba(0,0,0,.20);
+    }
+
+    /* Hero */
+    .hero{
+      margin-top: 10px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--panel2), var(--panel));
+      border-radius: 24px;
+      padding: 22px 18px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-60px -60px auto auto;
+      width:260px; height:260px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, rgba(124,156,255,.35), transparent 60%);
+      filter: blur(2px);
+      pointer-events:none;
+    }
+    .hero h1{
+      margin:0;
+      font-size: 24px;
+      letter-spacing:.3px;
+    }
+    .meta{
+      margin-top: 8px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .chip{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+    [data-theme="light"] .chip{ background: rgba(0,0,0,.03); }
+
+    /* Layout */
+    .grid{
+      margin-top: 16px;
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap: 16px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    /* Sidebar */
+    .side{
+      position: sticky;
+      top: 72px;
+    }
+    @media (max-width: 980px){
+      .side{ position: relative; top: 0; }
+    }
+
+    .card{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, var(--panel2), var(--panel));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .hd{
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .card .hd strong{ font-size: 13px; letter-spacing:.3px; }
+    .card .bd{ padding: 12px 12px; }
+
+    .search{
+      display:flex; gap:10px; align-items:center;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      border-radius: 14px;
+      padding: 10px 12px;
+    }
+    [data-theme="light"] .search{ background: rgba(0,0,0,.03); }
+    .search input{
+      width:100%;
+      border:none; outline:none; background:transparent;
+      color: var(--text); font-size: 13px;
+    }
+    .search svg{ opacity:.75; flex:0 0 auto; }
+
+    .toc{
+      margin-top: 12px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .toc a{
+      padding: 10px 12px;
+      border-radius: 12px;
+      border:1px solid transparent;
+      color: var(--muted);
+      font-size: 13px;
+      background: transparent;
+      transition: background .12s ease, border-color .12s ease, color .12s ease;
+    }
+    .toc a:hover{
+      background: rgba(255,255,255,.05);
+      border-color: var(--line);
+      color: var(--text);
+    }
+    [data-theme="light"] .toc a:hover{ background: rgba(0,0,0,.03); }
+    .toc a.active{
+      background: linear-gradient(135deg, rgba(124,156,255,.18), rgba(70,230,211,.10));
+      border-color: rgba(124,156,255,.30);
+      color: var(--text);
+    }
+
+    /* Content */
+    .content{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, var(--panel2), var(--panel));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .content .inner{
+      padding: 16px 16px 22px;
+    }
+    .content h2{
+      margin: 0 0 8px;
+      font-size: 18px;
+      letter-spacing:.2px;
+    }
+    .content h3{
+      margin: 18px 0 8px;
+      font-size: 15px;
+      letter-spacing:.2px;
+    }
+    .content p{ margin: 8px 0; color: var(--text); }
+    .content .muted{ color: var(--muted); }
+    .content ul{ margin: 8px 0 8px 18px; color: var(--text); }
+    .content li{ margin: 6px 0; }
+    .divider{ height:1px; background: var(--line); margin: 14px 0; }
+
+    .callout{
+      margin: 12px 0;
+      border:1px solid rgba(124,156,255,.28);
+      background: linear-gradient(135deg, rgba(124,156,255,.14), rgba(70,230,211,.08));
+      border-radius: var(--radius2);
+      padding: 12px 12px;
+    }
+    .callout strong{ font-size: 13px; }
+    .table{
+      margin-top: 10px;
+      border:1px solid var(--line);
+      border-radius: 14px;
+      overflow:hidden;
+    }
+    .table .r{
+      display:grid;
+      grid-template-columns: 160px 1fr;
+      gap:0;
+      border-bottom:1px solid var(--line);
+    }
+    .table .r:last-child{ border-bottom:none; }
+    .table .k{
+      padding: 10px 12px;
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size: 12px;
+    }
+    [data-theme="light"] .table .k{ background: rgba(0,0,0,.03); }
+    .table .v{
+      padding: 10px 12px;
+      font-size: 13px;
+      color: var(--text);
+    }
+    @media (max-width: 520px){
+      .table .r{ grid-template-columns: 1fr; }
+      .table .k{ border-bottom:1px solid var(--line); }
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align:center;
+      padding-bottom: 22px;
+    }
+
+    /* Floating */
+    .fab{
+      position: fixed;
+      right: 16px;
+      bottom: 18px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      z-index: 60;
+    }
+    .fab .mini{
+      width: 44px; height:44px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, var(--panel2), var(--panel));
+      box-shadow: var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition: transform .12s ease, opacity .12s ease;
+      opacity: .92;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .fab .mini:hover{ opacity:1; }
+    .fab .mini:active{ transform: translateY(1px); }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      *{ scroll-behavior: auto !important; transition:none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="row">
+        <div class="brand" aria-label="KuPoo Privacy Policy">
+          <div class="logo" aria-hidden="true"></div>
+          <div class="t">
+            <strong>KuPoo 隐私政策</strong>
+            <span>Version Release Date: January 2026 · Effective Date: January 2026</span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn" id="printBtn" type="button" title="打印 / 导出 PDF">
+            <span class="dot" aria-hidden="true"></span>
+            打印
+          </button>
+          <button class="btn" id="themeBtn" type="button" title="切换深浅色">
+            <span class="dot" aria-hidden="true"></span>
+            主题
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>我们如何收集、使用与保护你的信息</h1>
+      <div class="meta">
+        <span class="chip">适用于 KuPoo App 与相关服务</span>
+        <span class="chip">支持移动端阅读与搜索</span>
+        <span class="chip">目录可快速跳转</span>
+      </div>
+      <div class="callout" style="margin-top:14px">
+        <strong>提示：</strong>
+        <span class="muted">本页面内容已按你的隐私政策结构排版，你可以直接替换各段正文为完整条款。</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <!-- Sidebar -->
+      <aside class="side">
+        <div class="card">
+          <div class="hd">
+            <strong>快速定位</strong>
+            <span class="muted" id="matchCount" style="font-size:12px;"></span>
+          </div>
+          <div class="bd">
+            <div class="search">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <input id="q" placeholder="搜索条款关键词（如：位置、蓝牙、健康数据）" />
+            </div>
+
+            <nav class="toc" id="toc">
+              <a href="#overview">概述</a>
+              <a href="#collect">1. 我们收集的信息</a>
+              <a href="#use">2. 我们如何使用信息</a>
+              <a href="#share">3. 我们如何共享信息</a>
+              <a href="#security">4. 安全措施</a>
+              <a href="#transfer">5. 数据传输</a>
+              <a href="#retain">6. 数据留存</a>
+              <a href="#rights">7. 你的权利</a>
+              <a href="#minors">8. 未成年人</a>
+              <a href="#updates">9. 政策更新</a>
+              <a href="#contact">10. 联系我们</a>
+            </nav>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Content -->
+      <article class="content" id="content">
+        <div class="inner">
+
+          <section id="overview">
+            <h2>概述</h2>
+            <p>开发者 <b>Cai Xiaowei</b>（下称“KuPoo / 我们”）重视你的隐私与个人信息保护，并遵循适用的数据保护与隐私法律法规。</p>
+            <p class="muted">本政策将帮助你了解：我们收集哪些信息、如何使用与共享、如何保护信息、数据传输与留存、你的权利、未成年人保护、更新与联系方式等。</p>
+          </section>
+
+          <div class="divider"></div>
+
+          <section id="collect">
+            <h2>1. 我们收集的信息</h2>
+
+            <h3>1.1 场景化信息收集（示例）</h3>
+            <div class="table">
+              <div class="r">
+                <div class="k">场景</div>
+                <div class="v">设备管理（蓝牙连接、设置管理、固件/表盘更新、数据展示、激活追踪等）</div>
+              </div>
+              <div class="r">
+                <div class="k">可能收集的信息类型</div>
+                <div class="v">设备标识符（含 MAC）、设备硬件/使用信息、系统与网络信息、账号信息、通讯录/通话/通知、语音、位置、App 信息、交易信息、日程信息、运动与健康数据等</div>
+              </div>
+              <div class="r">
+                <div class="k">收集方式</div>
+                <div class="v">通过 App（以及在你授权的前提下，由设备同步）</div>
+              </div>
+            </div>
+
+            <div class="callout">
+              <strong>重要：</strong>
+              <span class="muted">例如定位、通讯录、通知、健康数据等权限，我们会在需要时向你弹窗请求授权，你可随时在系统设置中关闭。</span>
+            </div>
+
+            <h3>1.2 我们可能收集的信息类别</h3>
+            <ul>
+              <li><b>账号与个人资料</b>：生日、性别、身高体重、昵称、头像、目标等（用于健康算法与个性化展示）。</li>
+              <li><b>位置信息</b>：用于户外运动轨迹、天气显示、地区选择等（未授权不会访问 GPS）。</li>
+              <li><b>设备与 App 信息</b>：MAC/IMEI/固件版本/传感器信息/App 版本/系统版本/IP/网络类型等（用于更新与故障排查）。</li>
+              <li><b>运动与健康数据</b>：步数、距离、卡路里、心率、睡眠、血氧、体温等（视设备能力与授权而定）。</li>
+              <li><b>日志信息</b>：登录/配对/崩溃/网络等，用于定位问题与优化体验（例如仅保留近 7 天本地日志）。</li>
+            </ul>
+
+            <h3>1.3 权限说明（节选）</h3>
+            <ul>
+              <li><b>蓝牙</b>：连接设备与同步数据</li>
+              <li><b>网络</b>：在线功能与环境检测</li>
+              <li><b>定位</b>：天气更新、户外轨迹、找设备等</li>
+              <li><b>相机</b>：扫码连接、头像/表盘图片等</li>
+              <li><b>通知访问</b>：消息提醒同步到穿戴设备</li>
+              <li><b>健康同步</b>：与 Apple Health / Google Health 同步（需你授权）</li>
+            </ul>
+            <p class="muted">（你可以把文档里的权限清单逐条替换进来，页面结构已准备好。）</p>
+          </section>
+
+          <div class="divider"></div>
+
+          <section id="use">
+            <h2>2. 我们如何使用你的信息</h2>
+            <ul>
+              <li>提供、维护与改进产品/服务（如设备服务、售后支持、体验优化）。</li>
+              <li>用于统计分析与性能优化（例如基于设备标识符与错误日志进行问题定位）。</li>
+              <li>与你沟通、发送服务通知、响应你的咨询与请求。</li>
+              <li>按服务需求或法律义务进行存储与维护。</li>
+            </ul>
+          </section>
+
+          <div class="divider"></div>
+
+          <section id="share">
+            <h2>3. 我们如何共享你的信息</h2>
+            <p>除非获得你的同意，我们不会向第三方出售你的个人信息。对敏感信息的共享会获取你的明确授权。</p>
+            <ul>
+              <li><b>第三方平台</b>：如你授权，同步步数/心率等到 Apple Health / Google Health 等。</li>
+              <li><b>服务提供商</b>：用于监测分析、支付、通信等（按最小必要原则）。</li>
+              <li><b>业务合作方</b>：为你提供特定产品/服务所必需。</li>
+            </ul>
+          </section>
+
+          <div class="divider"></div>
+
+          <section id="security">
+            <h2>4. 安全措施</h2>
+            <p>我们采取合理的管理、技术与物理安全措施保护你的信息（如加密、认证、服务器安全等）。但互联网环境下仍无法保证 100% 绝对安全。</p>
+          </section>
+
+          <div class="divider"></div>
+
+          <section id="transfer">
+            <h2>5. 数据传输</h2>
+            <p>我们可能使用云服务。如涉及跨境传输，会在征得你同意并采取必要保护措施后进行。</p>
+          </section>
+
+          <div class="divider"></div>
+
+          <section id="retain">
+            <h2>6. 数据留存</h2>
+            <p>信息通常会在你的账号存续期间保留。你删除账号或提出删除请求后，我们会在合理期限内删除或匿名化处理。</p>
+          </section>
+
+          <div class="divider"></div>
+
+          <section id="rights">
+            <h2>7. 你的权利</h2>
+            <ul>
+              <li>访问、更正、删除你的个人信息</li>
+              <li>反对特定处理、请求数据可携带</li>
+              <li>随时撤回同意（可能影响部分功能使用）</li>
+              <li>在 App 内按路径删除账号（示例：我的 &gt; 账号管理 &gt; 删除账号）</li>
+            </ul>
+          </section>
+
+          <div class="divider"></div>
+
+          <section id="minors">
+            <h2>8. 未成年人</h2>
+            <p>产品/服务面向成年人。未满 13 岁儿童如需使用，应在监护人同意与指导下进行；若发现未经同意收集儿童信息，我们会尽快删除。</p>
+          </section>
+
+          <div class="divider"></div>
+
+          <section id="updates">
+            <h2>9. 政策更新</h2>
+            <p>我们可能不定期更新本政策。更新后继续使用产品/服务即视为你接受更新内容；如不同意，应停止使用相关服务。</p>
+          </section>
+
+          <div class="divider"></div>
+
+          <section id="contact">
+            <h2>10. 联系我们</h2>
+            <div class="table">
+              <div class="r">
+                <div class="k">地址</div>
+                <div class="v">A315, Building A, Huafeng International Robot Industrial Park, Hangcheng Avenue, Xixiang Road, Bao’an District, Shenzhen, China</div>
+              </div>
+              <div class="r">
+                <div class="k">邮箱</div>
+                <div class="v"><a href="mailto:xiaoweicai642@gmail.com">xiaoweicai642@gmail.com</a></div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </article>
+    </section>
+
+    <footer>
+      © <span id="year"></span> KuPoo · Privacy Policy · Mobile-friendly H5
+    </footer>
+  </main>
+
+  <div class="fab" aria-label="floating actions">
+    <button class="mini" id="topBtn" type="button" title="返回顶部" aria-label="Back to top">
+      ↑
+    </button>
+  </div>
+
+  <script>
+    (function(){
+      const root = document.documentElement;
+      const themeBtn = document.getElementById("themeBtn");
+      const printBtn = document.getElementById("printBtn");
+      const topBtn = document.getElementById("topBtn");
+      const q = document.getElementById("q");
+      const toc = document.getElementById("toc");
+      const matchCount = document.getElementById("matchCount");
+      const year = document.getElementById("year");
+      year.textContent = new Date().getFullYear();
+
+      // Theme: localStorage + system
+      const saved = localStorage.getItem("kp_theme");
+      const prefersLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+      const initial = saved || (prefersLight ? "light" : "dark");
+      root.setAttribute("data-theme", initial);
+
+      themeBtn.addEventListener("click", ()=>{
+        const cur = root.getAttribute("data-theme") || "dark";
+        const next = cur === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        localStorage.setItem("kp_theme", next);
+      });
+
+      printBtn.addEventListener("click", ()=> window.print());
+
+      topBtn.addEventListener("click", ()=>{
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // Smooth anchor scroll
+      document.addEventListener("click", (e)=>{
+        const a = e.target.closest('a[href^="#"]');
+        if(!a) return;
+        const id = a.getAttribute("href").slice(1);
+        const el = document.getElementById(id);
+        if(!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior:"smooth", block:"start" });
+        history.replaceState(null, "", "#" + id);
+      });
+
+      // TOC active highlight
+      const links = Array.from(toc.querySelectorAll("a"));
+      const sections = links.map(a => document.getElementById(a.getAttribute("href").slice(1))).filter(Boolean);
+
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(ent=>{
+          if(ent.isIntersecting){
+            const id = ent.target.id;
+            links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
+          }
+        });
+      }, { rootMargin: "-20% 0px -70% 0px", threshold: 0.01 });
+
+      sections.forEach(s => io.observe(s));
+
+      // Simple in-page search (filters by visibility)
+      const content = document.getElementById("content");
+      const allBlocks = Array.from(content.querySelectorAll("section, .divider, .callout, .table, p, ul, h2, h3"));
+
+      function normalize(s){ return (s||"").toLowerCase().trim(); }
+
+      q.addEventListener("input", ()=>{
+        const keyword = normalize(q.value);
+        if(!keyword){
+          allBlocks.forEach(el => el.style.display = "");
+          matchCount.textContent = "";
+          return;
+        }
+        let shown = 0;
+        allBlocks.forEach(el=>{
+          if(el.tagName === "SECTION"){
+            const ok2 = normalize(el.innerText).includes(keyword);
+            el.style.display = ok2 ? "" : "none";
+            if(ok2) shown++;
+          }else{
+            const ok = normalize(el.innerText).includes(keyword);
+            el.style.display = ok ? "" : "none";
+          }
+        });
+        matchCount.textContent = `匹配：${shown} 个章节`;
+      });
+
+      // Show/hide top button based on scroll
+      function onScroll(){
+        const y = window.scrollY || document.documentElement.scrollTop;
+        topBtn.style.opacity = y > 500 ? "1" : "0.0";
+        topBtn.style.pointerEvents = y > 500 ? "auto" : "none";
+      }
+      window.addEventListener("scroll", onScroll, { passive:true });
+      onScroll();
+    })();
+  </script>
+</body>
+</html>
